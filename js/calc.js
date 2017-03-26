@@ -36,8 +36,9 @@ function calculate(){
 	var dwell_time = [];
 	for (var i = 0; i < arrayLength; i++) {
 		dwell_time[i] = time_stamp[i]["up"] - time_stamp[i]["down"];
+		console.log(time_stamp[i]["down"] + " " + time_stamp[i]["up"])
 		if(i != 0){
-			flight_time[i] = time_stamp[i]['down'] - time_stamp[i-1]['up'];
+			flight_time[i] = time_stamp[i]['down'] - time_stamp[i-1]['down'];
 		}
 		console.log(time_stamp[i]["up"] - time_stamp[i]["down"] + " " + flight_time[i]);
 
@@ -46,8 +47,8 @@ function calculate(){
 	for (var i = 0; i < arrayLength; i++) {
 		key_press_sequence[i] = (String.fromCharCode(key_press_sequence[i]));
 	}
+
 	$("#flight_time").val(flight_time.slice(1).join());
 	$("#dwell_time").val(dwell_time.slice(0,-1).join());
 	$("#key_press_sequence").val( key_press_sequence.join());
-
 }
