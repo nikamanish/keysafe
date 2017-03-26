@@ -15,7 +15,7 @@
                 type: 'line',
                 data: [$temp],
                 fill: false,
-                borderColor: '#9dd0fd'
+                borderColor: getRandomColor()
             },";
     }
 
@@ -38,7 +38,7 @@ $sql = "SELECT key_time FROM dwell_time WHERE user_id=2" ;
                 type: 'line',
                 data: [$temp],
                 fill: false,
-                borderColor: '#f60dd9'
+                borderColor: getRandomColor()
             },";
     }
 
