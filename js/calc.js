@@ -6,29 +6,33 @@ var key_press_sequence = [];
 
 function newKeyDown(e)
 {
-   var keynum = e.which || e.keyCode;
-   key_sequence.push(keynum);
-   time_stamp.push({
-   	"down": new Date().getTime(),
-   	"up": null
-   });
-   var current_down_time = new Date().getTime();
-   key_press_sequence.push(keynum);
-
+	var keynum = e.which || e.keyCode;
+	if(keynum != 13){
+		key_sequence.push(keynum);
+		time_stamp.push({
+		"down": new Date().getTime(),
+		"up": null
+	});
+	var current_down_time = new Date().getTime();
+	key_press_sequence.push(keynum);
+	console.log(keynum)
+	}
 }
 
 function newKeyUp(e)
 {
 	var flag;
-    var keynum = e.which || e.keyCode;
-    var arrayLength = key_sequence.length;
-	for (var i = 0; i < arrayLength; i++) {
-		if(key_sequence[i] == keynum){
-			flag = i;
+	var keynum = e.which || e.keyCode;
+	if(keynum != 13){
+		var arrayLength = key_sequence.length;
+		for (var i = 0; i < arrayLength; i++) {
+			if(key_sequence[i] == keynum){
+				flag = i;
+			}
 		}
+		time_stamp[flag]["up"] = new Date().getTime();
+		key_press_sequence.push(keynum);
 	}
-	time_stamp[flag]["up"] = new Date().getTime();
-	key_press_sequence.push(keynum);
 }
 
 function calculate(){
@@ -36,11 +40,9 @@ function calculate(){
 	var dwell_time = [];
 	for (var i = 0; i < arrayLength; i++) {
 		dwell_time[i] = time_stamp[i]["up"] - time_stamp[i]["down"];
-		console.log(time_stamp[i]["down"] + " " + time_stamp[i]["up"])
 		if(i != 0){
 			flight_time[i] = time_stamp[i]['down'] - time_stamp[i-1]['down'];
 		}
-		console.log(time_stamp[i]["up"] - time_stamp[i]["down"] + " " + flight_time[i]);
 
 	}
 	arrayLength = key_press_sequence.length;
@@ -54,10 +56,10 @@ function calculate(){
 }
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++ ) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
 }
