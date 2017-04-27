@@ -11,7 +11,7 @@
 	$row=mysqli_fetch_assoc($result);
 	$id=$row['id'];
 	$realpassword=$row['password'];
-	
+
 	if($password == $realpassword)
 	{
 		$sql = "INSERT INTO flight_time(user_id, password, key_time) VALUES($id, '$realpassword', '$flight_time')";
